@@ -11,6 +11,12 @@ type User {
     savedBooks: [Book]
 }
 
+input UserInput {
+    username: String
+    email: String
+    password: String
+}
+
 type Book {
     bookId: ID
     authors: [String]
@@ -39,5 +45,6 @@ type Mutation {
     addUser(input: UserInput!): Auth
     saveBook(bookData: BookInput!): User
     removeBook(bookId: ID!): User
-}
-`
+}`;
+
+export default typeDefs;

@@ -1,5 +1,5 @@
-import { User, Book } from '../models/index.js';
-import { signToken, AuthenticationError } from '../services/auth';
+import { User } from '../models/index.js';
+import { signToken, AuthenticationError } from '../services/auth.js';
 
 interface LoginArgs {
     email: string;
@@ -31,14 +31,16 @@ interface RemoveBookArgs {
 
 const resolvers = {
     Query: {
-        me: async () => {
-                return await User.findById(User._id).populate('savedBooks');
-                throw new AuthenticationError('You need to be logged in!');
+        me: async (_parent: unknown, _args: unknown, context: any) => {
+            if (!context.user) {
+            throw new AuthenticationError('You must be logged in!');
+            }
+            return context.user; 
         },
     },
     Mutation: {
         login: async (_parent: any, { email, password }: LoginArgs) => {
-            const user = await User.findOne({ email });
+            const user: any = await User.findOne({ email });
             if (!user) {
                 throw new AuthenticationError('Invalid credentials');
             }
@@ -51,7 +53,8 @@ const resolvers = {
         },
 
         addUser: async (_parent: any, { input }: AddUserArgs) => {
-            const user = await User.create({ input });
+            console.log(input);
+            const user = await User.create( input );
             const token = signToken(user.username, user.email, user.password);
             return { token, user };
         },
