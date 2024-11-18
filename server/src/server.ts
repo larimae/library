@@ -6,22 +6,15 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { authenticateToken } from './services/auth.js';
 import { typeDefs, resolvers } from './schemas/index.js';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 
-// interface Context {
-//   user: JwtPayload | null;
-// }
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: ({ req }): Context => {
-  //   const authHeader = req.headers.authorization || '';
-  //   const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7).trim() : '';
-
-  //   const user = token ? authenticateToken(token) : null;
-  //   return { user };
-  // },
 
 });
 
