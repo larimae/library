@@ -21,6 +21,14 @@ export const USER_LOGIN = gql`
         email
         _id
         username
+        savedBooks {
+        bookId
+        authors
+        description
+        title
+        image
+        link
+      }
       }
     }
   }

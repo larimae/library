@@ -37,8 +37,10 @@ const LoginForm = ({ handleModalClose }: LoginFormProps) => {
       });
 
       const token = data?.login?.token;
+      const books = data?.login?.user?.savedBooks;
       if (token) {
         Auth.login(token);
+        localStorage.setItem('books', JSON.stringify(books));
         handleModalClose(); // Close the modal after successful login
       } else {
         throw new Error('Login failed: No token returned');

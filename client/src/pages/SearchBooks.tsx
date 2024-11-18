@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect} from 'react';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
@@ -12,6 +12,11 @@ const SearchBooks = () => {
   const [savedBooks, setSavedBooks] = useState<Book[]>([]);
   const [searchInput, setSearchInput] = useState(''); 
   const [saveBook] = useMutation(SAVE_BOOK); 
+
+  useEffect(() => {
+      const books = JSON.parse(localStorage.getItem('books') || ' ');
+      setSavedBooks(books);
+  }, []);
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

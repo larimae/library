@@ -35,7 +35,7 @@ const resolvers = {
             if (!context.user) {
             throw new AuthenticationError('You must be logged in!');
             }
-            return context.user; 
+            return await User.findOne({ _id: context.user._id}); 
         },
     },
     Mutation: {
