@@ -6,10 +6,11 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
+import NavBar from './components/Navbar.tsx';
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -34,11 +35,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="flex-column justify-flex-start min-100-vh">
-        <Header />
+        <NavBar />
         <div className="container">
-          <Outlet />
+          <Routes>
+          <Route path="/login" element={<LoginForm handleModalClose={() => {}} />} />
+          <Route path="/signup" element={<SignupForm handleModalClose={() => {}} />} />
+            {/* Other routes */}
+            <Route path="/" element={<Outlet />} />
+          </Routes>
         </div>
-        <Footer />
       </div>
     </ApolloProvider>
   );

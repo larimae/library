@@ -17,6 +17,8 @@
     "concurrently": "^8.2.0"
   },
   "dependencies": {
+    "@apollo/client": "^3.11.10",
+    "graphql": "^16.9.0",
     "ts-node": "^10.9.2"
   }
 }

@@ -1,4 +1,4 @@
-import type { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
