@@ -36,13 +36,14 @@ function App() {
     <ApolloProvider client={client}>
       <div className="flex-column justify-flex-start min-100-vh">
         <NavBar />
+        <Outlet />
         <div className="container">
-          <Routes>
-          <Route path="/login" element={<LoginForm handleModalClose={() => {}} />} />
-          <Route path="/signup" element={<SignupForm handleModalClose={() => {}} />} />
+          {/* <Routes> */}
+          {/* <Route path="/login" element={<LoginForm handleModalClose={() => {}} />} />
+          <Route path="/signup" element={<SignupForm handleModalClose={() => {}} />} /> */}
             {/* Other routes */}
-            <Route path="/" element={<Outlet />} />
-          </Routes>
+            {/* <Route path="/" element={} /> */}
+          {/* </Routes> */}
         </div>
       </div>
     </ApolloProvider>

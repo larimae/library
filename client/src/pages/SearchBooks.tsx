@@ -9,6 +9,7 @@ import type { GoogleAPIBook } from '../models/GoogleAPIBook';
 
 const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); 
+  const [savedBooks, setSavedBooks] = useState<Book[]>([]);
   const [searchInput, setSearchInput] = useState(''); 
   const [saveBook] = useMutation(SAVE_BOOK); 
 
@@ -40,7 +41,7 @@ const SearchBooks = () => {
     try{
       const {data} = await saveBook({
         variables: {
-          bookInput: {
+          bookData: {
             bookId: book.bookId,
             authors: book.authors,
             description: book.description,
@@ -54,6 +55,8 @@ const SearchBooks = () => {
       if (data) {
         console.log(`Book saved: ${data.saveBook.title}`);
       }
+
+        setSavedBooks([...savedBooks, book]);
 
       console.log('Book saved: ${data.saveBook.title}');
     } catch (error) {
@@ -112,13 +115,13 @@ const SearchBooks = () => {
                   <Card.Text>{book.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
-                      disabled={searchedBooks.some(
-                        (savedBook) => savedBook.bookId === book.bookId
-                      )}
+                      // disabled={searchedBooks.some(
+                      //   (savedBook) => savedBook.bookId === book.bookId
+                      // )}
                       className="btn-block btn-info"
                       onClick={() => handleSaveBook(book)}
                     >
-                      {searchedBooks.some(
+                      {savedBooks.some(
                         (savedBook) => savedBook.bookId === book.bookId
                       )
                         ? 'This book has already been saved!'

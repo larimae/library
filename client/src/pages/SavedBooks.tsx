@@ -8,13 +8,15 @@ import type { Book } from '../models/User';
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(ME);
+  const [removeBook] = useMutation(REMOVE_BOOK);
   const userData = data?.me || {};
 
   if (loading) {
   return <h2>LOADING...</h2>;
   }
+  console.log(data);
 
-  const [removeBook] = useMutation(REMOVE_BOOK);
+  
 
   const handleDeleteBook = async (bookId: string) => {
     try {
