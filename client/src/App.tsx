@@ -1,16 +1,8 @@
 import './App.css';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { Outlet, Route, Routes } from 'react-router-dom';
-
+import { Outlet } from 'react-router-dom';
 import NavBar from './components/Navbar.tsx';
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -38,12 +30,6 @@ function App() {
         <NavBar />
         <Outlet />
         <div className="container">
-          {/* <Routes> */}
-          {/* <Route path="/login" element={<LoginForm handleModalClose={() => {}} />} />
-          <Route path="/signup" element={<SignupForm handleModalClose={() => {}} />} /> */}
-            {/* Other routes */}
-            {/* <Route path="/" element={} /> */}
-          {/* </Routes> */}
         </div>
       </div>
     </ApolloProvider>

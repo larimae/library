@@ -42,7 +42,7 @@ const SignupForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
       const token = data?.addUser?.token;
       if (token) {
         Auth.login(token);
-        handleModalClose(); // Close the modal on success
+        handleModalClose(); 
       } else {
         throw new Error('No token returned from addUser mutation');
       }
