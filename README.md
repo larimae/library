@@ -9,7 +9,7 @@ This project transforms a RESTful API-driven Google Books search engine into a G
 - [Installation](#installation)
 - [Deployment](#deployment)
 - [Screenshots](#screenshots)
-- [Contributin]
+- [Contributions](#contributions)
 
 
 

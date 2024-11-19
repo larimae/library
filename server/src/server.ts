@@ -6,25 +6,26 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { authenticateToken } from './services/auth.js';
 import { typeDefs, resolvers } from './schemas/index.js';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+// import { dirname } from 'path';
+// import { fileURLToPath } from 'url';
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-
 });
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+
 
 const startApolloServer = async () => {
 
   await server.start();
   await db();
+
+  const app = express();
+  const PORT = process.env.PORT || 3001;
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
@@ -34,10 +35,10 @@ const startApolloServer = async () => {
   }));
 
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('./client/dist/assets')); //issue line serveing index not serving assets not accessing js correclty
+    app.use(express.static('../client/dist')); //issue line serveing index not serving assets not accessing js correclty
 
     app.get('*', (_req: Request, res: Response) => {
-      res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
 
