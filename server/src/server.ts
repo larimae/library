@@ -36,6 +36,7 @@ const startApolloServer = async () => {
 
   if (process.env.NODE_ENV === 'production') {
     console.log(__dirname, "static");
+    console.log(path.join(__dirname, '../client/dist'));
     app.use(express.static( '../client/dist')); //issue line serveing index not serving assets not accessing js correclty
 
     app.get('*', (_req: Request, res: Response) => {
