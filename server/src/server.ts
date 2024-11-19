@@ -27,13 +27,6 @@ const startApolloServer = async () => {
   const app = express();
   const PORT = process.env.PORT || 3001;
 
-  app.use(express.urlencoded({ extended: false }));
-  app.use(express.json());
-
-  app.use('/graphql', expressMiddleware(server as any, {
-    context: authenticateToken as any
-  }));
-
   if (process.env.NODE_ENV === 'production') {
     console.log(__dirname, "static");
     console.log(path.join(__dirname, '../../client/dist'));
@@ -44,6 +37,13 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
     });
   }
+
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+
+  app.use('/graphql', expressMiddleware(server as any, {
+    context: authenticateToken as any
+  }));
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
