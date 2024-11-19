@@ -14,7 +14,7 @@ const SearchBooks = () => {
   const [saveBook] = useMutation(SAVE_BOOK); 
 
   useEffect(() => {
-      const books = JSON.parse(localStorage.getItem('books') || ' ');
+      const books = localStorage.getItem("books") ? JSON.parse(localStorage.getItem('books')!) : [];
       setSavedBooks(books);
   }, []);
 
